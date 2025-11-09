@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe Labs - Cyberbezpieczeństwo dla Młodych</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #6366F1;
+            --secondary: #06B6D4;
+            --dark: #0F172A;
+            --gray: #64748B;
+            --light-gray: #F1F5F9;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(135deg, #F8FAFC 0%, #EEF2FF 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .hero-text .highlight {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shield-icon {
+            font-size: 20rem;
+            opacity: 0.1;
+            position: absolute;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 10%;
+            right: 10%;
+            animation-delay: 0.5s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 1s;
+        }
+
+        .floating-element:nth-child(4) {
+            top: 50%;
+            right: 0;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .about-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Features */
+        #features {
+            background: var(--light-gray);
+            padding: 5rem 5%;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--white);
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .team-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .team-card p {
+            color: var(--gray);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--light-gray);
+            padding: 5rem 5%;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        input, textarea {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--dark);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">🛡️ Safe Labs</div>
+            <ul>
+                <li><a href="#home">Start</a></li>
+                <li><a href="#about">O Projekcie</a></li>
+                <li><a href="#features">Warsztaty</a></li>
+                <li><a href="#team">Zespół</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Cyberbezpieczeństwo <span class="highlight">dla Młodych</span></h1>
+                <p>Warsztaty edukacyjne dla uczniów szkół podstawowych w Warszawie. Uczymy bezpiecznego poruszania się w internecie przez zabawę i praktykę.</p>
+                <div class="cta-buttons">
+                    <a href="#about" class="btn btn-primary">Dowiedz się więcej</a>
+                    <a href="#contact" class="btn btn-secondary">Kontakt</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="shield-icon">🛡️</div>
+                <div class="floating-element">
+                    <div class="stat">500+</div>
+                    <div class="stat-label">Uczniów</div>
+                </div>
+                <div class="floating-element">
+                    <div class="stat">20+</div>
+                    <div class="stat-label">Warsztatów</div>
+                </div>
+                <div class="floating-element">
+                    <div class="stat">10+</div>
+                    <div class="stat-label">Szkół</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>O Projekcie Safe Labs</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🎯 Nasza Misja</h3>
+                <p>Uczymy uczniów szkół podstawowych bezpiecznego korzystania z internetu. Poprzez interaktywne warsztaty pokazujemy, jak chronić się przed zagrożeniami online i być odpowiedzialnym internautą.</p>
+            </div>
+            <div class="about-card">
+                <h3>🎮 Nauka przez Zabawę</h3>
+                <p>Warsztaty przeprowadzamy w formie gier, quizów i praktycznych ćwiczeń dostosowanych do wieku uczniów. Dzieci uczą się haseł, rozpoznawania phishingu i bezpiecznego zachowania w sieci.</p>
+            </div>
+            <div class="about-card">
+                <h3>🏫 Dla Szkół</h3>
+                <p>Współpracujemy ze szkołami podstawowymi w Warszawie, oferując bezpłatne warsztaty w ramach programu "Zwolnieni z Teorii". Każde zajęcia trwają 90 minut i są prowadzone przez młodych edukatorów.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="features-container">
+            <h2>Nasze Warsztaty</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Bezpieczne Hasła</h3>
+                    <p>Uczymy dzieci tworzenia silnych haseł i bezpiecznego przechowywania danych logowania.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎣</div>
+                    <h3>Rozpoznawanie Phishingu</h3>
+                    <p>Pokazujemy, jak rozpoznać podejrzane wiadomości, fałszywe strony i oszustwa internetowe.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Bezpieczeństwo w Mediach</h3>
+                    <p>Rozmawiamy o prywatności w social mediach i bezpiecznym udostępnianiu informacji.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3>Gry Online</h3>
+                    <p>Uczymy bezpiecznego grania online, rozpoznawania nieznajomych i ochrony danych osobowych.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Smartfony i Tablety</h3>
+                    <p>Pokazujemy zasady bezpiecznego korzystania z urządzeń mobilnych i aplikacji.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Cyberprzemoc</h3>
+                    <p>Rozmawiamy o szacunku w sieci, reagowaniu na przemoc online i szukaniu pomocy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2>Nasz Zespół</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">🎓</div>
+                <h3>Edukator</h3>
+                <p>Prowadzący warsztaty</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">🎓</div>
+                <h3>Edukator</h3>
+                <p>Prowadzący warsztaty</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">🎓</div>
+                <h3>Edukator</h3>
+                <p>Prowadzący warsztaty</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">👨‍💼</div>
+                <h3>Koordynator</h3>
+                <p>Koordynator Projektu</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-content">
+            <h2>Skontaktuj Się z Nami</h2>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Imię i Nazwisko</label>
+                        <input type="text" id="name" placeholder="Jan Kowalski" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="jan@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Temat</label>
+                        <input type="text" id="subject" placeholder="Zaproszenie na warsztaty" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Wiadomość</label>
+                        <textarea id="message" placeholder="Opisz swoją sprawę..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="handleSubmit(event)">Wyślij Wiadomość</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" title="GitHub">💻</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Email">✉️</a>
+            </div>
+            <p>&copy; 2024 Safe Labs. Projekt realizowany w ramach programu "Zwolnieni z Teorii"</p>
+            <p style="margin-top: 1rem;">Warszawa, Polska 🇵🇱</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && subject && message) {
+                alert('Dziękujemy za wiadomość! Skontaktujemy się z Tobą wkrótce.');
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert('Proszę wypełnić wszystkie pola formularza.');
+            }
+        }
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 50) {
+                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
+            }
+
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
